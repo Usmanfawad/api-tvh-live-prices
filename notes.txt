@@ -1,0 +1,12 @@
+Fallback quantity -> 1 digit
+
+If there is quantity i.e. TVH_Abfragemenge value, then we will ignore the fallbackQuantity
+in the GUI
+
+Amount of articles in tbl cache
+
+Create a loader
+
+We will use the current date.
+Format - 2018-11-21
+
