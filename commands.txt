@@ -1,0 +1,4 @@
+# Running the server
+
+
+uvicorn APP.main:app --reload --port 8000

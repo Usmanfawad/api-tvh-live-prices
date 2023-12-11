@@ -1,18 +1,21 @@
 from fastapi import APIRouter, status, Response, HTTPException, Depends, status, Body
 import asyncio
-
+import httpx
 
 import time
 
 
 from App.db.session import get_db
-from App.db.controllers.fill_cache_table import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache
+from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache
 
+
+from App.schema import UserInput
 
 router = APIRouter()
 
-@router.get("/", tags=["index"])
-async def user_home():
+@router.post("/", tags=["index"])
+async def user_home(userInput : UserInput):
+    print(userInput)
     return {
         "Success": "500"
     }
@@ -21,8 +24,8 @@ async def user_home():
 async def user_home():
     print("URL")
     # delete_table = delete_table_cache()
-    delete_table = insert_into_table_cache()
-    if delete_table:
+    insert_table = insert_into_table_cache()
+    if insert_table:
         return {
             "Success": "500"
         }
@@ -35,7 +38,7 @@ async def user_home():
 async def perform_database_operation(batch_number):
     # Your asynchronous database operation here
     print(f"Batch {batch_number} in progress")
-    await asyncio.sleep(10)  # Simulating a 10-minute operation
+    await asyncio.sleep(10)
     return f"Batch {batch_number} completed."
 
 @router.get("/process_batches")

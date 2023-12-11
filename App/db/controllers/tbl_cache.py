@@ -21,10 +21,10 @@ def insert_into_table_cache():
         conn = get_db()
         cur = conn.cursor()
         sql_string = """
-        INSERT INTO tbl_cache ( Bestellnummer, Lieferant_Marke, aktiv, Lieferant )
-        SELECT tbl_Bestell_Nr.Bestellnummer, First(tbl_MakeCodes.code) AS Make_Code, tbl_Bestell_Nr.aktiv, tbl_Bestell_Nr.Lieferant
-        FROM tbl_Bestell_Nr INNER JOIN tbl_MakeCodes ON tbl_Bestell_Nr.Lieferant_Marke = tbl_MakeCodes.descr
-        GROUP BY tbl_Bestell_Nr.Bestellnummer, tbl_Bestell_Nr.aktiv, tbl_Bestell_Nr.Lieferant
+        INSERT INTO tbl_cache ( Bestellnummer, Lieferant_Marke, aktiv, Lieferant, inquiryAmount )
+        SELECT tbl_Bestell_Nr.Bestellnummer, First(tbl_MakeCodes.code) AS Make_Code, tbl_Bestell_Nr.aktiv, tbl_Bestell_Nr.Lieferant, tbl_Artikel.TVH_Abfragemenge
+        FROM tbl_Artikel INNER JOIN (tbl_Bestell_Nr INNER JOIN tbl_MakeCodes ON tbl_Bestell_Nr.Lieferant_Marke = tbl_MakeCodes.descr) ON tbl_Artikel.Art_Nr_NuFa = tbl_Bestell_Nr.NuFa_Artikel
+        GROUP BY tbl_Bestell_Nr.Bestellnummer, tbl_Bestell_Nr.aktiv, tbl_Bestell_Nr.Lieferant, tbl_Artikel.TVH_Abfragemenge
         HAVING (((tbl_Bestell_Nr.aktiv)=True) AND ((tbl_Bestell_Nr.Lieferant)=1));
         """
         cur.execute(sql_string)
