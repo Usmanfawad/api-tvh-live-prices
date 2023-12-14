@@ -41,7 +41,7 @@ def delete_from_table_cache():
     try:
         conn = get_db()
         cur = conn.cursor()
-        sql_query = "DELETE FROM tbl_cache WHERE (Bestellnummer IS NULL OR Bestellnummer = '') OR (Lieferant_Marke IS NULL OR Lieferant_Marke = '')"
+        sql_string = "DELETE FROM tbl_cache WHERE (Bestellnummer IS NULL OR Bestellnummer = '') OR (Lieferant_Marke IS NULL OR Lieferant_Marke = '')"
         cur.execute(sql_string)
         conn.commit()
         cur.close()
@@ -53,17 +53,29 @@ def delete_from_table_cache():
 
 def select_from_table_cache():
     try:
+        print("Selecting")
         conn = get_db()
         cur = conn.cursor()
-        sql_query = "SELECT Lieferant_Marke, Bestellnummer FROM tbl_cache"
-        cur.execute(sql_string)
-        conn.commit()
+        sql_query = "SELECT Lieferant_Marke, Bestellnummer, inquiryAmount FROM tbl_cache"
+        cur.execute(sql_query)
+        rows = cur.fetchall()
         cur.close()
-        conn.close()
-        return True
+        print(rows)
+        return rows
     except Exception as e:
         print(f"Error: {e}")
         return False
+
+
+def update_json_strings_in_cache(updates):
+    print("Updating the tbl cache")
+    conn = get_db()
+    cur = conn.cursor()
+    for lieferant_marke, bestellnummer, json_string in updates:
+        cur.execute("UPDATE tbl_cache SET json_string = ? WHERE Lieferant_Marke = ? AND Bestellnummer = ?", (json_string, lieferant_marke, bestellnummer))
+    conn.commit()
+    cur.close()
+
 
 
 if __name__ == "__main__":

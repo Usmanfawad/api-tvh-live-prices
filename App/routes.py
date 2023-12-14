@@ -7,7 +7,7 @@ import time
 
 from App.db.session import get_db
 from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache
-
+from App.tvh.api import tvh_api
 
 from App.schema import UserInput
 
@@ -15,23 +15,23 @@ router = APIRouter()
 
 @router.post("/", tags=["index"])
 async def user_home(userInput : UserInput):
+    tvh_api_call = await tvh_api(customerCode=userInput.customerCode, fallbackQuantity=userInput.fallbackQuantity, userText=userInput.userText)
     print(userInput)
-    return {
-        "Success": "500"
-    }
+    return tvh_api_call
 
 @router.post("/submitProcess", tags=["home"])
 async def user_home():
     print("URL")
-    # delete_table = delete_table_cache()
+    delete_table = delete_table_cache()
     insert_table = insert_into_table_cache()
-    if insert_table:
+    delete_from = delete_from_table_cache()
+    try:
         return {
             "Success": "500"
         }
-    else:
+    except Exception as e:
         print("Err")
-        raise HTTPException(status_code=404, detail="Table didnt delete")
+        raise HTTPException(status_code=404, detail="Access db pre-processing error.")
 
 
 
