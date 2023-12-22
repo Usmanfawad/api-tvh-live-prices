@@ -5,6 +5,7 @@ f'DRIVER={{Microsoft Access Driver (*.mdb, *.accdb)}};DBQ={ACCESS_DATABASE_URL};
 
 
 def delete_table_cache():
+
     try:
         conn = get_db()
         cur = conn.cursor()
@@ -12,11 +13,13 @@ def delete_table_cache():
         cur.commit()
         conn.close()
         return True
+
     except Exception as e:
         print(f"Error: {e}")
         return False
 
 def insert_into_table_cache():
+
     try:
         conn = get_db()
         cur = conn.cursor()
@@ -32,12 +35,14 @@ def insert_into_table_cache():
         cur.close()
         conn.close()
         return True
+
     except Exception as e:
         print(f"Error: {e}")
         return False
 
 
 def delete_from_table_cache():
+
     try:
         conn = get_db()
         cur = conn.cursor()
@@ -47,34 +52,43 @@ def delete_from_table_cache():
         cur.close()
         conn.close()
         return True
+
     except Exception as e:
         print(f"Error: {e}")
         return False
 
 def select_from_table_cache():
+
     try:
-        print("Selecting")
         conn = get_db()
         cur = conn.cursor()
-        sql_query = "SELECT Lieferant_Marke, Bestellnummer, inquiryAmount FROM tbl_cache"
+        sql_query = "SELECT Lieferant_Marke, Bestellnummer, inquiryAmount FROM tbl_cache ORDER BY Bestellnummer ASC"
         cur.execute(sql_query)
         rows = cur.fetchall()
         cur.close()
-        print(rows)
         return rows
+
     except Exception as e:
         print(f"Error: {e}")
         return False
 
 
-def update_json_strings_in_cache(updates):
-    print("Updating the tbl cache")
+def update_json_strings_in_cache(updates, price, listPrice):
     conn = get_db()
     cur = conn.cursor()
-    for lieferant_marke, bestellnummer, json_string in updates:
-        cur.execute("UPDATE tbl_cache SET json_string = ? WHERE Lieferant_Marke = ? AND Bestellnummer = ?", (json_string, lieferant_marke, bestellnummer))
-    conn.commit()
+    for lieferant_marke, bestellnummer, json_string, json_response in updates:
+        cur.execute("""UPDATE tbl_cache 
+        SET json_string = ?, 
+        json_response = ?, 
+        price = ?, 
+        listPrice = ? 
+        WHERE Lieferant_Marke = ? AND Bestellnummer = ?""", (json_string, json_response, price, listPrice, lieferant_marke, bestellnummer))
+        conn.commit()
+
     cur.close()
+    conn.close()
+
+    return
 
 
 
