@@ -10,3 +10,16 @@ Create a loader
 We will use the current date.
 Format - 2018-11-21
 
+
+
+Implement a server/thread restart if there is a websocket close error.
+
+
+
+Implement a configuration for mysql..
+You can connect with
+    1) Ms ACCESS
+    2) My Sql
+
+Jan will export access to Mysql
+

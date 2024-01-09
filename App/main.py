@@ -11,8 +11,8 @@ def get_application() -> FastAPI:
 
     ## Start FastApi App
     application = FastAPI(
-        title="X Server",
-        summary="x API",
+        title="TVH",
+        summary="xTVH 3rd party API",
         version="0.0.1",
         contact={
             "name": "Usman Fawad",

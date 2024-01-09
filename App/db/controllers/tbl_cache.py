@@ -1,6 +1,12 @@
 from App.db.session import get_db, exec_query
 
-ACCESS_DATABASE_URL = r'C:\NextRevol\nufaersatzteile\NuFa\TVH_Abgleich.accdb'
+
+from datetime import datetime
+
+current_date = datetime.now().strftime('%d/%m/%Y')
+print(type(current_date))
+
+ACCESS_DATABASE_URL = r'C:\NextRevol\NufaersatzteileProject\App\db\TVH_Abgleich.accdb'
 f'DRIVER={{Microsoft Access Driver (*.mdb, *.accdb)}};DBQ={ACCESS_DATABASE_URL};'
 
 
@@ -81,8 +87,9 @@ def update_json_strings_in_cache(updates, price, listPrice):
         SET json_string = ?, 
         json_response = ?, 
         price = ?, 
-        listPrice = ? 
-        WHERE Lieferant_Marke = ? AND Bestellnummer = ?""", (json_string, json_response, price, listPrice, lieferant_marke, bestellnummer))
+        listPrice = ?,
+        Datum = ?
+        WHERE Lieferant_Marke = ? AND Bestellnummer = ?""", (json_string, json_response, price, listPrice, current_date, lieferant_marke, bestellnummer))
         conn.commit()
 
     cur.close()

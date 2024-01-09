@@ -6,7 +6,7 @@ from typing import Deque, List, Optional, Tuple
 import asyncio
 import httpx
 import json
-
+import datetime
 import time
 
 
@@ -25,16 +25,18 @@ async def user_home(userInput: UserInput):
         "Success": "500"
     }
 
-@router.post("/submitProcess", tags=["home"])
-async def submit_process():
+@router.post("/preProcessing", tags=["preProcessing"])
+async def pre_processing():
+    print("Being called")
     delete_table = delete_table_cache()
     insert_table = insert_into_table_cache()
     delete_from = delete_from_table_cache()
     try:
         return {
-            "Success": "500"
+            "Success": "Pre Processing script successfully terminated"
         }
     except Exception as e:
+        print("Exception")
         raise HTTPException(status_code=404, detail="Access db pre-processing error.")
 
 userInput = {}
@@ -66,6 +68,8 @@ async def websocket_endpoint(
 async def perform_database_operation(batch_number, lower_bound, upper_bound, websocket: WebSocket):
     # Your asynchronous database operation here
     # print(f"Batch {batch_number} in progress")
+    ct = datetime.datetime.now()
+    await websocket.send_text(f" -------- Initiate time: {ct} -------- ")
     await websocket.send_text(f" -------- Thread {batch_number} Initiated --------")
     tvh_api_call = await tvh_api(
         batch_number=batch_number,
@@ -77,6 +81,8 @@ async def perform_database_operation(batch_number, lower_bound, upper_bound, web
         websocket=websocket
     )
     await websocket.send_text(f"\n -------- Thread {batch_number} terminated -------- \n")
+    ct = datetime.datetime.now()
+    await websocket.send_text(f" -------- Termination time: {ct} -------- ")
 
     # await asyncio.sleep(10)
     return f"Batch {batch_number} completed."
@@ -89,7 +95,7 @@ async def simulate_task(
 
     try:
         results = await asyncio.gather(
-            perform_database_operation(1, 1312, 4000, websocket),
+            perform_database_operation(1, 0, 2500, websocket),
             # perform_database_operation(2, 2500, 5000, websocket),
             # perform_database_operation(3, 5000, 7500, websocket),
             # perform_database_operation(4, 7500, 10000, websocket),
