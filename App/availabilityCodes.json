@@ -1,0 +1,1057 @@
+[
+    {
+        "language": "EN",
+        "code": "01",
+        "description": "1-2 Days"
+    },
+    {
+        "language": "EN",
+        "code": "02",
+        "description": "2-3 Days"
+    },
+    {
+        "language": "EN",
+        "code": "03",
+        "description": "3-5 Days"
+    },
+    {
+        "language": "EN",
+        "code": "04",
+        "description": "4-6 Days"
+    },
+    {
+        "language": "EN",
+        "code": "05",
+        "description": "5-7 Days"
+    },
+    {
+        "language": "EN",
+        "code": "06",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "07",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "08",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "09",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "10",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "11",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "12",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "13",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "14",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "15",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "16",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "17",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "18",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "19",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "20",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "21",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "22",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "23",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "24",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "25",
+        "description": "4-5 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "26",
+        "description": "4-5 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "27",
+        "description": "4-5 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "28",
+        "description": "4-5 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "29",
+        "description": "4-6 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "30",
+        "description": "4-6 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "31",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "32",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "33",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "34",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "35",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "36",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "37",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "38",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "39",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "40",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "41",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "42",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "43",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "44",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "45",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "46",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "47",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "48",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "49",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "50",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "51",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "52",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "53",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "54",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "55",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "56",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "57",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "58",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "59",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "60",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "61",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "62",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "63",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "64",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "65",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "66",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "67",
+        "description": "2-3 Months"
+    },
+    {
+        "language": "EN",
+        "code": "68",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "69",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "70",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "71",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "72",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "73",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "74",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "75",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "76",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "77",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "78",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "79",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "80",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "81",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "82",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "83",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "84",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "85",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "86",
+        "description": "3-4 Months"
+    },
+    {
+        "language": "EN",
+        "code": "87",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "88",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "89",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "90",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "91",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "92",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "93",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "94",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "95",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "96",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "97",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "98",
+        "description": "4-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "99",
+        "description": "stock"
+    },
+    {
+        "language": "EN",
+        "code": "B2",
+        "description": "2-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "BO",
+        "description": "Backordered"
+    },
+    {
+        "language": "EN",
+        "code": "DC",
+        "description": "In other DC"
+    },
+    {
+        "language": "EN",
+        "code": "dl",
+        "description": "Diff lead time"
+    },
+    {
+        "language": "EN",
+        "code": "ds",
+        "description": "partial st"
+    },
+    {
+        "language": "EN",
+        "code": "e1",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e2",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e3",
+        "description": "3-5 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e4",
+        "description": "4-6 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e5",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e6",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e7",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e8",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "e9",
+        "description": "9-11 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EA",
+        "description": "1-2 Days"
+    },
+    {
+        "language": "EN",
+        "code": "EB",
+        "description": "2-3 Days"
+    },
+    {
+        "language": "EN",
+        "code": "EC",
+        "description": "3-5 Days"
+    },
+    {
+        "language": "EN",
+        "code": "ED",
+        "description": "4-6 Days"
+    },
+    {
+        "language": "EN",
+        "code": "EE",
+        "description": "5-7 Days"
+    },
+    {
+        "language": "EN",
+        "code": "EF",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EG",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EH",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EI",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EJ",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EK",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EL",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EM",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EN",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EO",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EP",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EQ",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "ER",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "ES",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "ET",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EU",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EV",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EW",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EX",
+        "description": "4-6 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EY",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "EZ",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "m1",
+        "description": "4-6 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "m2",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "m3",
+        "description": "12-14 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "m4",
+        "description": "4-5 Months"
+    },
+    {
+        "language": "EN",
+        "code": "m5",
+        "description": "5-6 Months"
+    },
+    {
+        "language": "EN",
+        "code": "m6",
+        "description": "6-7 Months"
+    },
+    {
+        "language": "EN",
+        "code": "m7",
+        "description": "7-8 months"
+    },
+    {
+        "language": "EN",
+        "code": "m8",
+        "description": "8-9 months"
+    },
+    {
+        "language": "EN",
+        "code": "m9",
+        "description": "9-10 months"
+    },
+    {
+        "language": "EN",
+        "code": "MA",
+        "description": "10-12 months"
+    },
+    {
+        "language": "EN",
+        "code": "MB",
+        "description": "11-13 months"
+    },
+    {
+        "language": "EN",
+        "code": "MD",
+        "description": "13-15 months"
+    },
+    {
+        "language": "EN",
+        "code": "ns",
+        "description": "no stock"
+    },
+    {
+        "language": "EN",
+        "code": "PD",
+        "description": "Primary DC"
+    },
+    {
+        "language": "EN",
+        "code": "st",
+        "description": "stock"
+    },
+    {
+        "language": "EN",
+        "code": "t",
+        "description": "On request"
+    },
+    {
+        "language": "EN",
+        "code": "u4",
+        "description": "4 hours"
+    },
+    {
+        "language": "EN",
+        "code": "un",
+        "description": "Curr. unknown"
+    },
+    {
+        "language": "EN",
+        "code": "V",
+        "description": "term follows"
+    },
+    {
+        "language": "EN",
+        "code": "w1",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w2",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w3",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w4",
+        "description": "4-6 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w5",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w6",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w7",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w8",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "w9",
+        "description": "9-11 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "WA",
+        "description": "10-12 weeks"
+    },
+    {
+        "language": "EN",
+        "code": "WB",
+        "description": "11-13 weeks"
+    },
+    {
+        "language": "EN",
+        "code": "WD",
+        "description": "14-15 weeks"
+    },
+    {
+        "language": "EN",
+        "code": "WE",
+        "description": "15-17 weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X1",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X2",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X3",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X4",
+        "description": "4-6 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X5",
+        "description": "5-7 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X6",
+        "description": "6-8 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X7",
+        "description": "7-9 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X8",
+        "description": "8-10 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "X9",
+        "description": "9-11 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XA",
+        "description": "1-2 Days"
+    },
+    {
+        "language": "EN",
+        "code": "XB",
+        "description": "2-3 Days"
+    },
+    {
+        "language": "EN",
+        "code": "XC",
+        "description": "3-5 Days"
+    },
+    {
+        "language": "EN",
+        "code": "XD",
+        "description": "4-6 Days"
+    },
+    {
+        "language": "EN",
+        "code": "XE",
+        "description": "5-7 Days"
+    },
+    {
+        "language": "EN",
+        "code": "XF",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XG",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XH",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XI",
+        "description": "1-2 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XJ",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XK",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XL",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XM",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XN",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XO",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XP",
+        "description": "2-3 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XQ",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XR",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XS",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XT",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XU",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XV",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XW",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XX",
+        "description": "3-4 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XY",
+        "description": "4-5 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "XZ",
+        "description": "4-5 Weeks"
+    },
+    {
+        "language": "EN",
+        "code": "y1",
+        "description": "12-15 months"
+    },
+    {
+        "language": "EN",
+        "code": "Yb",
+        "description": "14-16 months"
+    },
+    {
+        "language": "EN",
+        "code": "Yc",
+        "description": "16-20 months"
+    },
+    {
+        "language": "EN",
+        "code": "Yd",
+        "description": "18-24 months"
+    },
+    {
+        "language": "EN",
+        "code": "Ye",
+        "description": "24-36 months"
+    }
+]

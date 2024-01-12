@@ -39,6 +39,23 @@ async def pre_processing():
         print("Exception")
         raise HTTPException(status_code=404, detail="Access db pre-processing error.")
 
+@router.post("/postProcessing", tags=["postProcessing"])
+async def post_processing():
+    print("Being called")
+    # call tvh api to get all codes.
+
+    delete_table = delete_table_cache()
+    insert_table = insert_into_table_cache()
+    delete_from = delete_from_table_cache()
+    try:
+        return {
+            "Success": "Post processing script successfully terminated"
+        }
+    except Exception as e:
+        print("Exception")
+        raise HTTPException(status_code=404, detail="Access db post-processing error.")
+
+
 userInput = {}
 
 @router.websocket("/ws/{customerCode}/{userPassword}/{customerPartNumber}/{userText}/{fallbackQuantity}/{toUpdateArticles}/{parallelConnections}")

@@ -25,15 +25,26 @@ def select_from_table_cache():
         cur = conn.cursor()
         query = """
             SELECT 
-                tbl_Preise.NuFa_Art,
-                tbl_Preise.lst_Preis,
-                tbl_cache.Datum
-            FROM table_Preise
-            INNER JOIN tbl_cache ON tbl_Preise.NuFa_Art = tbl_cache.Bestellnummer
+                *,
+                tbl_Bestell_Nr.NuFa_Artikel
+            FROM tbl_cache
         """
+
+        query = """
+        SELECT tbl_cache.Lieferant_Marke, tbl_Bestell_Nr.NuFa_Artikel , tbl_cache.price, tbl_cache.listPrice
+        FROM tbl_Bestell_Nr
+        LEFT JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
+                  AND tbl_Bestell_Nr.Lieferant_Marke = tbl_cache.Lieferant_Marke;
+        """
+
         cur.execute(query)
         rows = cur.fetchall()
-        print(rows)
+        print(len(rows))
+        for each_row in rows:
+            # print(each_row[16])
+            # print(each_row[20])
+            print(each_row)
+            print("\n\n\n")
         cur.close()
         return rows
 
@@ -58,16 +69,6 @@ def update_json_strings_in_cache():
             INNER JOIN tbl_cache ON tbl_Preise.NuFa_Art = tbl_cache.Bestellnummer
         """
 
-        query = """
-           UPDATE tbl_Preise
-           SET 
-               EKPreis = (SELECT price FROM tbl_cache WHERE tbl_cache.Bestellnummer = tbl_Bestell_Nr.Bestellnummer),
-               lst_Preis = (SELECT listPrice FROM tbl_cache WHERE tbl_cache.Bestellnummer = tbl_Bestell_Nr.Bestellnummer)
-           FROM 
-               tbl_Preise
-           JOIN 
-               tbl_Bestell_Nr ON tbl_Preise.NuFa_Art = tbl_Bestell_Nr.NuFa_Artikel;
-           """
 
 
 
@@ -82,5 +83,5 @@ def update_json_strings_in_cache():
 
 
 if __name__ == "__main__":
-    # select_from_table_cache()
-    update_json_strings_in_cache()
+    select_from_table_cache()
+    # update_json_strings_in_cache()
