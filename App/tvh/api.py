@@ -36,7 +36,8 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                 "partNumber": row.Bestellnummer,
                 "customerPartNumber": f"Testanfrage Teil {index}",
                 # Fallback quantity condition, if it exists in the database, then use it or else input
-                "quantity": row.inquiryAmount,
+                # "quantity": row.inquiryAmount,
+                "quantity" : 1,
                 "text": userText
             }
 
@@ -66,7 +67,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
             async with httpx.AsyncClient() as client:
                 try:
                     updates = []
-                    response = await client.post(ROUTE_POST, headers=headers, json=dict(payload), timeout=30)
+                    response = await client.post(ROUTE_POST, headers=headers, json=dict(payload), timeout=150)
                     response.raise_for_status()
                     print("The response is: ")
                     print(response)
@@ -84,9 +85,13 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
 
                     update_db = update_json_strings_in_cache(updates, price, listPrice, availability_code)
                     # return {"api_response": api_response}
+
                 except httpx.HTTPError as e:
+                    with open(r'/App/db/errorLog.txt', 'a') as f:
+                        f.write(str(payload))
+                        f.write("\n")
                     print(e)
-                    raise HTTPException(status_code=e.response.status_code, detail=str(e.response.text))
+                    # raise HTTPException(status_code=e.response.status_code, detail=str(e.response.text))
 
 
         return {"api_response": api_response}

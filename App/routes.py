@@ -80,7 +80,7 @@ async def websocket_endpoint(
 
 async def perform_database_operation(batch_number, lower_bound, upper_bound, websocket: WebSocket):
     # Your asynchronous database operation here
-    # print(f"Batch {batch_number} in progress")
+    await asyncio.sleep(batch_number + 3)
     ct = datetime.datetime.now()
     await websocket.send_text(f" -------- Initiate time: {ct} -------- ")
     await websocket.send_text(f" -------- Thread {batch_number} Initiated --------")
