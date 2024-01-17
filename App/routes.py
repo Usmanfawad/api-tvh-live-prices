@@ -42,11 +42,7 @@ async def pre_processing():
 @router.post("/postProcessing", tags=["postProcessing"])
 async def post_processing():
     print("Being called")
-    # call tvh api to get all codes.
-
-    delete_table = delete_table_cache()
-    insert_table = insert_into_table_cache()
-    delete_from = delete_from_table_cache()
+    time.sleep(5)
     try:
         return {
             "Success": "Post processing script successfully terminated"
@@ -113,9 +109,9 @@ async def simulate_task(
     try:
         results = await asyncio.gather(
             perform_database_operation(1, 0, 2500, websocket),
-            # perform_database_operation(2, 2500, 5000, websocket),
-            # perform_database_operation(3, 5000, 7500, websocket),
-            # perform_database_operation(4, 7500, 10000, websocket),
+            perform_database_operation(2, 2500, 5000, websocket),
+            perform_database_operation(3, 5000, 7500, websocket),
+            perform_database_operation(4, 7500, 10000, websocket),
         )
         result_data = {"status": "success", "message": "Task completed!"}
         await websocket.send_text(json.dumps(result_data))

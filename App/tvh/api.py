@@ -25,7 +25,6 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
 
         data_from_tbl_cache = select_from_table_cache()
         data_from_cache = data_from_tbl_cache[lower_bound:upper_bound]
-        # print(data_from_cache)
         updates = []
 
         for index, row in enumerate(data_from_cache, 1):
@@ -69,25 +68,26 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     updates = []
                     response = await client.post(ROUTE_POST, headers=headers, json=dict(payload), timeout=30)
                     response.raise_for_status()
+                    print("The response is: ")
+                    print(response)
                     # Parse and return the response data
                     api_response = response.json()
                     inquiry_number = dict(api_response[0])["inquiryNumberTVH"]
-                    # print("Inquiry number: " + str(inquiry_number))
                     price = dict(api_response[0])["lines"][0]["price"]
-                    # print("Price: " + str(price))
                     listPrice = dict(api_response[0])["lines"][0]["listPrice"]
-                    # print("listPrice: " + str(listPrice))
                     partNumber = dict(api_response[0])["lines"][0]["partNumber"]
                     makeCode = dict(api_response[0])["lines"][0]["makeCode"]
+                    availability_code = dict(api_response[0])["lines"][0]["availabilityCode"]
                     await websocket.send_text(f"Thread number: {batch_number} | Inquiry number: {inquiry_number} | Part number: {partNumber} | Make code: {makeCode} ")
                     api_response_json_dumps = json.dumps(api_response, indent= 4)
                     updates.append((row.Lieferant_Marke, row.Bestellnummer, json_dump, api_response_json_dumps))
 
-                    update_db = update_json_strings_in_cache(updates, price, listPrice)
+                    update_db = update_json_strings_in_cache(updates, price, listPrice, availability_code)
                     # return {"api_response": api_response}
                 except httpx.HTTPError as e:
                     print(e)
                     raise HTTPException(status_code=e.response.status_code, detail=str(e.response.text))
+
 
         return {"api_response": api_response}
 
