@@ -41,31 +41,55 @@ def availability_code_from_json_response():
 
 
 def join_table_update_tbl_preise():
-
+    current_date = datetime.now().strftime('%d/%m/%Y')
     try:
         conn = get_db()
+        conn.autocommit = True
         cur = conn.cursor()
 
-        query = """
-        SELECT tbl_cache.listPrice, tbl_cache.price, tbl_cache.availabilityCode, tbl_Bestell_Nr.NuFa_Artikel
-        FROM tbl_Bestell_Nr
-        LEFT JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
-                  AND tbl_Bestell_Nr.Lieferant_Marke = tbl_cache.Lieferant_Marke;
+        # First creating another table that takes the last prices of dates and duplicates all NuFa_Arts
+
+        query_delete_dups = """
+        SELECT T.NuFa_Art, T.Datum, T.EKPreis, T.fid_Liefer
+        FROM tbl_Preise AS T INNER JOIN (SELECT [NuFa_Art], Max([Datum]) AS MaxDatum FROM tbl_Preise GROUP BY [NuFa_Art])  AS Q ON (T.[Datum] = Q.MaxDatum) AND (T.[NuFa_Art] = Q.[NuFa_Art])
+        WHERE (((T.Datum)<>#12/1/2016 1:0:0#));
         """
 
-        cur.execute(query)
+        # delete_all_from_tbl_Preise = """
+        # DELETE FROM tbl_Preise
+        # """
+
+        cur.execute(query_delete_dups)
         rows = cur.fetchall()
-        print(len(rows))
         print(rows)
 
-        # table_Preise = "tbl_Preise"
-        # column_names = ['lst_Preis', 'EKPreis', 'Lieferzeit']
-        # sql_query = f"UPDATE {table_Preise} SET {', '.join([f'{col} = ?' for col in column_names])} WHERE NuFa_Art = ?"
-        # cur.executemany(sql_query, rows)
+        cur.execute(delete_all_from_tbl_Preise)
+        # conn.commit()
+
+
+        # query = """
+        # SELECT tbl_cache.listPrice, tbl_cache.price, tbl_cache.availabilityCode, tbl_cache.Datum, tbl_Bestell_Nr.NuFa_Artikel
+        # FROM tbl_Bestell_Nr
+        # LEFT JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
+        #           AND tbl_Bestell_Nr.Lieferant_Marke = tbl_cache.Lieferant_Marke;
+        # """
+        #
+        # cur.execute(query)
+        # rows = cur.fetchall()
+        # print(rows)
+        #
+        # try:
+        #     table_Preise = "tbl_Preise"
+        #     column_names = ['lst_Preis', 'EKPreis', 'Lieferzeit', 'Datum']
+        #     sql_query = f"UPDATE {table_Preise} SET {', '.join([f'{col} = ?' for col in column_names])} WHERE NuFa_Art = ?"
+        #     cur.executemany(sql_query, rows)
+        # except Exception as e:
+        #     print(e)
+
 
         # for each_row in rows:
         #     if tuple(each_row).count(None) < 3:
-        #         cur.execute("UPDATE tbl_Preise SET lst_Preis = ?, EKPreis = ?, Lieferzeit = ? where NuFa_Art = ?", (each_row[1], each_row[2], each_row[3], each_row[0]))
+        #         cur.execute("UPDATE tbl_Preise SET lst_Preis = ?, EKPreis = ?, Lieferzeit = ?, Datum = ? where NuFa_Art = ?", (each_row[1], each_row[2], each_row[3], current_date, each_row[0]))
         #         conn.commit()
         #         print(each_row)
 
@@ -75,8 +99,8 @@ def join_table_update_tbl_preise():
         print(f"Error: {e}")
         return False
 
-    conn.commit()
-    cur.commit()
+    # conn.commit()
+    # cur.commit()
     cur.close()
     conn.close()
 

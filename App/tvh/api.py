@@ -2,6 +2,9 @@ import httpx
 import asyncio
 import base64
 import json
+from decimal import Decimal
+
+
 from fastapi import APIRouter, status, Response, HTTPException, Depends, status, Body, WebSocket, WebSocketDisconnect
 
 
@@ -74,20 +77,25 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     # Parse and return the response data
                     api_response = response.json()
                     inquiry_number = dict(api_response[0])["inquiryNumberTVH"]
-                    price = dict(api_response[0])["lines"][0]["price"]
-                    listPrice = dict(api_response[0])["lines"][0]["listPrice"]
+                    try:
+                        price = Decimal(dict(api_response[0])["lines"][0]["price"]).quantize(Decimal('0.00'))
+                        listPrice = Decimal(dict(api_response[0])["lines"][0]["listPrice"]).quantize(Decimal('0.00'))
+                    except:
+                        price = dict(api_response[0])["lines"][0]["price"]
+                        listPrice = dict(api_response[0])["lines"][0]["listPrice"]
                     partNumber = dict(api_response[0])["lines"][0]["partNumber"]
                     makeCode = dict(api_response[0])["lines"][0]["makeCode"]
                     availability_code = dict(api_response[0])["lines"][0]["availabilityCode"]
                     await websocket.send_text(f"Thread number: {batch_number} | Inquiry number: {inquiry_number} | Part number: {partNumber} | Make code: {makeCode} ")
                     api_response_json_dumps = json.dumps(api_response, indent= 4)
                     updates.append((row.Lieferant_Marke, row.Bestellnummer, json_dump, api_response_json_dumps))
-
+                    print("Price: " + str(price))
+                    print("ListPrice: " + str(listPrice))
                     update_db = update_json_strings_in_cache(updates, price, listPrice, availability_code)
                     # return {"api_response": api_response}
 
                 except httpx.HTTPError as e:
-                    with open(r'/App/db/errorLog.txt', 'a') as f:
+                    with open(r'C:\NextRevol\NufaersatzteileProject\App\db\errorLog.txt', 'a') as f:
                         f.write(str(payload))
                         f.write("\n")
                     print(e)

@@ -105,16 +105,20 @@ async def perform_database_operation(batch_number, lower_bound, upper_bound, web
 async def simulate_task(
         websocket: WebSocket
 ):
-
+    st = datetime.datetime.now()
+    await websocket.send_text(f" -------- Start timestamp: {st} -------- ")
     try:
         results = await asyncio.gather(
-            perform_database_operation(1, 0, 2500, websocket),
-            perform_database_operation(2, 2500, 5000, websocket),
-            perform_database_operation(3, 5000, 7500, websocket),
-            perform_database_operation(4, 7500, 10000, websocket),
+            perform_database_operation(1, 10865, 10867, websocket),
+            # perform_database_operation(2, 10216, 10432, websocket),
+            # perform_database_operation(3, 10432, 10648, websocket),
+            # perform_database_operation(4, 10648, 10866, websocket),
         )
         result_data = {"status": "success", "message": "Task completed!"}
         await websocket.send_text(json.dumps(result_data))
 
     except WebSocketDisconnect:
         print("WebSocket disconnected")
+
+    et = datetime.datetime.now()
+    await websocket.send_text(f" -------- End timestamp: {et} -------- ")
