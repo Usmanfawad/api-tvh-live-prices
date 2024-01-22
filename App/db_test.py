@@ -63,8 +63,10 @@ def join_table_update_tbl_preise():
         rows = cur.fetchall()
         print(rows)
 
-        cur.execute(delete_all_from_tbl_Preise)
+        # cur.execute(delete_all_from_tbl_Preise)
         # conn.commit()
+
+        # now inserting the rows inside tbl_Preise
 
 
         # query = """
