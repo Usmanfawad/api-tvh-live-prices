@@ -13,6 +13,7 @@ import time
 from App.db.session import get_db
 from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache
 from App.tvh.api import tvh_api
+from App.post_processing import *
 
 from App.schema import UserInput
 
@@ -42,7 +43,7 @@ async def pre_processing():
 @router.post("/postProcessing", tags=["postProcessing"])
 async def post_processing():
     print("Being called")
-    time.sleep(5)
+    update_tbl_Preis()
     try:
         return {
             "Success": "Post processing script successfully terminated"

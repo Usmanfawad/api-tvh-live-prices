@@ -40,7 +40,7 @@ def availability_code_from_json_response():
     conn.close()
 
 
-def join_table_update_tbl_preise():
+def pre_post_processing():
     current_date = datetime.now().strftime('%d/%m/%Y')
     try:
         conn = get_db()
@@ -55,45 +55,24 @@ def join_table_update_tbl_preise():
         WHERE (((T.Datum)<>#12/1/2016 1:0:0#));
         """
 
-        # delete_all_from_tbl_Preise = """
-        # DELETE FROM tbl_Preise
-        # """
+        delete_all_from_tbl_Preise = """
+        DELETE FROM tbl_Preise
+        """
 
         cur.execute(query_delete_dups)
         rows = cur.fetchall()
-        print(rows)
+        print(len(rows))
 
-        # cur.execute(delete_all_from_tbl_Preise)
-        # conn.commit()
+        cur.execute(delete_all_from_tbl_Preise)
+        conn.commit()
 
-        # now inserting the rows inside tbl_Preise
+        # Insert the data into another table (tbl_Preise)
+        for row in rows:
+            insert_query = "INSERT INTO tbl_Preise (NuFa_Art, Datum, EKPreis, fid_Liefer) VALUES (?, ?, ?, ?)"
+            cur.execute(insert_query, row)
 
-
-        # query = """
-        # SELECT tbl_cache.listPrice, tbl_cache.price, tbl_cache.availabilityCode, tbl_cache.Datum, tbl_Bestell_Nr.NuFa_Artikel
-        # FROM tbl_Bestell_Nr
-        # LEFT JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
-        #           AND tbl_Bestell_Nr.Lieferant_Marke = tbl_cache.Lieferant_Marke;
-        # """
-        #
-        # cur.execute(query)
-        # rows = cur.fetchall()
-        # print(rows)
-        #
-        # try:
-        #     table_Preise = "tbl_Preise"
-        #     column_names = ['lst_Preis', 'EKPreis', 'Lieferzeit', 'Datum']
-        #     sql_query = f"UPDATE {table_Preise} SET {', '.join([f'{col} = ?' for col in column_names])} WHERE NuFa_Art = ?"
-        #     cur.executemany(sql_query, rows)
-        # except Exception as e:
-        #     print(e)
-
-
-        # for each_row in rows:
-        #     if tuple(each_row).count(None) < 3:
-        #         cur.execute("UPDATE tbl_Preise SET lst_Preis = ?, EKPreis = ?, Lieferzeit = ?, Datum = ? where NuFa_Art = ?", (each_row[1], each_row[2], each_row[3], current_date, each_row[0]))
-        #         conn.commit()
-        #         print(each_row)
+        cur.close()
+        conn.close()
 
         return rows
 
@@ -107,7 +86,7 @@ def join_table_update_tbl_preise():
     conn.close()
 
 if __name__ == "__main__":
-    join_table_update_tbl_preise()
+    pre_post_processing()
 
     # this was just used as a test, ran it already, have all availability codes in the DB now.
     # availability_code_from_json_response()
