@@ -6,9 +6,6 @@ from datetime import datetime
 current_date = datetime.now().strftime('%d/%m/%Y')
 print(type(current_date))
 
-ACCESS_DATABASE_URL = r'C:\NextRevol\NufaersatzteileProject\App\db\NuFa.accdb'
-f'DRIVER={{Microsoft Access Driver (*.mdb, *.accdb)}};DBQ={ACCESS_DATABASE_URL};'
-
 
 def delete_table_cache():
 
@@ -16,11 +13,12 @@ def delete_table_cache():
         conn = get_db()
         cur = conn.cursor()
         cur.execute("DELETE FROM tbl_cache")
-        cur.commit()
+        conn.commit()
         conn.close()
         return True
 
     except Exception as e:
+        print("Error delete_table_cache")
         print(f"Error: {e}")
         return False
 
@@ -31,7 +29,7 @@ def insert_into_table_cache():
         cur = conn.cursor()
 
         # Select from tbl_Bestellnummer
-        select_query = "SELECT Bestellnummer, Lieferant, NuFa_Artikel, Lieferant_Marke, aktiv FROM tbl_Bestell_Nr WHERE Aktiv=Yes AND Lieferant=1"
+        select_query = "SELECT Bestellnummer, Lieferant, NuFa_Artikel, Lieferant_Marke, aktiv FROM tbl_Bestell_Nr WHERE aktiv='WAHR' AND Lieferant=1"
 
         # Execute the query
         cur.execute(select_query)
@@ -44,19 +42,18 @@ def insert_into_table_cache():
         print(len(rows))
 
         # Insert data into tbl_cache
-        insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (?, ?, ?, ?)"
+        insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (%s, %s, %s, %s)"
 
         for row in rows:
-            with open("combinations.txt", "a") as f:
-                f.write(str(row[0]) + str(row[3]) + "\n")
+            # with open("combinations.txt", "a") as f:
+            #     f.write(str(row[0]) + str(row[3]) + "\n")
             combination = (row[0], row[3])  # 0 - Bestellnummer 3 - Lieferank marke
+            print(row)
             if combination not in unique_combinations:
-                cur.execute(insert_query, row[0], row[1], row[3], row[4])
-                conn.commit()
+                cur.execute(insert_query, (row[0], row[1], row[3], row[4]))
                 unique_combinations.add(combination)
 
-        f.close()
-
+        conn.commit()
         # sql_string = """
         # INSERT INTO tbl_cache ( Bestellnummer, Lieferant_Marke, aktiv, Lieferant, inquiryAmount )
         # SELECT tbl_Bestell_Nr.Bestellnummer, First(tbl_MakeCodes.code) AS Make_Code, tbl_Bestell_Nr.aktiv, tbl_Bestell_Nr.Lieferant, tbl_Artikel.TVH_Abfragemenge
@@ -72,6 +69,7 @@ def insert_into_table_cache():
         return True
 
     except Exception as e:
+        print("Error insert_into_table_cache")
         print(f"Error: {e}")
         return False
 
@@ -89,6 +87,7 @@ def delete_from_table_cache():
         return True
 
     except Exception as e:
+        print("Error delete_from_table_cache")
         print(f"Error: {e}")
         return False
 
@@ -104,6 +103,7 @@ def select_from_table_cache():
         return rows
 
     except Exception as e:
+        print("Error select_from_table_cache")
         print(f"Error: {e}")
         return False
 

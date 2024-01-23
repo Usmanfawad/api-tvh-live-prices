@@ -8,6 +8,7 @@ import httpx
 import json
 import datetime
 import time
+import os
 
 
 from App.db.session import get_db
@@ -21,6 +22,7 @@ router = APIRouter()
 
 @router.post("/", tags=["index"])
 async def user_home(userInput: UserInput):
+    print(get_db())
     # tvh_api_call = await tvh_api(customerCode=userInput.customerCode, fallbackQuantity=userInput.fallbackQuantity, userText=userInput.userText)
     return {
         "Success": "500"

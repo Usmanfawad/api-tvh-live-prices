@@ -1,18 +1,39 @@
 import pyodbc
+import mysql.connector
+
+import os
 from typing import Generator
+
 from App.core.config import settings
 
 
 database_path = settings.ACCESS_DATABASE_URL
 con_string = settings.ACCESS_CONN_STRING
 
-def get_db():
 
-    conn = pyodbc.connect(con_string)
+
+
+
+
+def get_db():
     try:
-        return conn
+        database_type = os.getenv("DATABASE_TYPE", "mysql")
+        if database_type == "msaccess":
+            print("Ms Access connected")
+            conn = pyodbc.connect(con_string)
+            return conn
+        elif database_type == "mysql":
+            mysqldb = mysql.connector.connect(
+                host="nufa-ersatzteile.de",
+                user="d03e7870",
+                password="XmvruZzZYSPFtp87T8SP",
+                database="d03e7870"
+            )
+            return mysqldb
+        else:
+            raise ValueError("Unsupported database type")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error {e}")
 
 
 def exec_query(str_query):

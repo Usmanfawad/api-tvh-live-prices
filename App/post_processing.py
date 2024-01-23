@@ -1,4 +1,4 @@
-# from App.db.session import get_db, exec_query
+from App.db.session import get_db, exec_query
 
 import httpx
 import asyncio
@@ -16,13 +16,13 @@ ROUTE_GET = "https://api.tvh.com/availability-codes?language=en"
 # DATA_TVH_AVAILABILITY = json.load(f)
 
 
-def get_db():
-
-    conn = pyodbc.connect(ACCESS_CONN_STRING)
-    try:
-        return conn
-    except Exception as e:
-        print(f"Error: {e}")
+# def get_db():
+#
+#     conn = pyodbc.connect(ACCESS_CONN_STRING)
+#     try:
+#         return conn
+#     except Exception as e:
+#         print(f"Error: {e}")
 
 
 
