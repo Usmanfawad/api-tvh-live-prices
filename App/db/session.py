@@ -2,6 +2,8 @@ import pyodbc
 import mysql.connector
 
 import os
+from dotenv import load_dotenv
+
 from typing import Generator
 
 from App.core.config import settings
@@ -13,13 +15,12 @@ con_string = settings.ACCESS_CONN_STRING
 
 
 
-
-
 def get_db():
     try:
-        database_type = os.getenv("DATABASE_TYPE", "mysql")
+        # Load environment variables from .env file
+        load_dotenv()
+        database_type = os.getenv("DATABASE_TYPE")
         if database_type == "msaccess":
-            print("Ms Access connected")
             conn = pyodbc.connect(con_string)
             return conn
         elif database_type == "mysql":

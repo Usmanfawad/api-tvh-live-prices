@@ -31,12 +31,13 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
         updates = []
 
         for index, row in enumerate(data_from_cache, 1):
+            # print("----------------------Loop----------------------")
             # enumerate, starting item 1
             line = {
                 # Line number fixed, its just when you send multiple requests at one time
                 "lineNumber": 1,
-                "makeCode": row.Lieferant_Marke,
-                "partNumber": row.Bestellnummer,
+                "makeCode": row[0],
+                "partNumber": row[1],
                 "customerPartNumber": f"Testanfrage Teil {index}",
                 # Fallback quantity condition, if it exists in the database, then use it or else input
                 # "quantity": row.inquiryAmount,
@@ -67,8 +68,10 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                 "payload": payload
             }
             json_dump = json.dumps(complete_request, indent=4)
+            # print("----------------------Dumping----------------------")
             async with httpx.AsyncClient() as client:
                 try:
+                    # print("----------------------API call----------------------")
                     updates = []
                     response = await client.post(ROUTE_POST, headers=headers, json=dict(payload), timeout=150)
                     response.raise_for_status()
@@ -88,7 +91,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     availability_code = dict(api_response[0])["lines"][0]["availabilityCode"]
                     await websocket.send_text(f"Thread number: {batch_number} | Inquiry number: {inquiry_number} | Part number: {partNumber} | Make code: {makeCode} ")
                     api_response_json_dumps = json.dumps(api_response, indent= 4)
-                    updates.append((row.Lieferant_Marke, row.Bestellnummer, json_dump, api_response_json_dumps))
+                    updates.append((row[0], row[1], json_dump, api_response_json_dumps))
                     print("Price: " + str(price))
                     print("ListPrice: " + str(listPrice))
                     update_db = update_json_strings_in_cache(updates, price, listPrice, availability_code)
@@ -100,7 +103,6 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                         f.write("\n")
                     print(e)
                     # raise HTTPException(status_code=e.response.status_code, detail=str(e.response.text))
-
 
         return {"api_response": api_response}
 

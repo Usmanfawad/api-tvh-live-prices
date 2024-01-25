@@ -33,7 +33,7 @@ async def pre_processing():
     print("Being called")
     delete_table = delete_table_cache()
     insert_table = insert_into_table_cache()
-    delete_from = delete_from_table_cache()
+    # delete_from = delete_from_table_cache()
     try:
         return {
             "Success": "Pre Processing script successfully terminated"
@@ -112,10 +112,10 @@ async def simulate_task(
     await websocket.send_text(f" -------- Start timestamp: {st} -------- ")
     try:
         results = await asyncio.gather(
-            perform_database_operation(1, 10865, 10867, websocket),
-            # perform_database_operation(2, 10216, 10432, websocket),
-            # perform_database_operation(3, 10432, 10648, websocket),
-            # perform_database_operation(4, 10648, 10866, websocket),
+            # perform_database_operation(1, 0, 3, websocket),
+            perform_database_operation(2, 10216, 10229, websocket),
+            perform_database_operation(3, 10432, 10439, websocket),
+            # perform_database_operation(4, 10648, 10650, websocket),
         )
         result_data = {"status": "success", "message": "Task completed!"}
         await websocket.send_text(json.dumps(result_data))
