@@ -20,6 +20,9 @@ def to_base64(string_credentials):
     return base64_string
 
 async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_bound, upper_bound, websocket: WebSocket):
+    # Getting makecodes from the file
+    with open(r"C:\NextRevol\NufaersatzteileProject\App\makeCodes.json", "r") as json_file:
+        data = json.load(json_file)
     try:
         # Here the customer code from frontend input will be there
         # ROUTE_POST = f"https://api.tvh.com/customers/customerCode/inquiries"
@@ -36,7 +39,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
             line = {
                 # Line number fixed, its just when you send multiple requests at one time
                 "lineNumber": 1,
-                "makeCode": row[0],
+                "makeCode": data[row[0]],
                 "partNumber": row[1],
                 "customerPartNumber": f"Testanfrage Teil {index}",
                 # Fallback quantity condition, if it exists in the database, then use it or else input
