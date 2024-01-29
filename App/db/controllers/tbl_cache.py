@@ -38,14 +38,12 @@ def insert_into_table_cache():
         # Execute the query
         cur.execute(select_query)
 
-        # Create a set to store unique combinations
-        unique_combinations = set()
-
         # Fetch all rows from the result set
         rows = cur.fetchall()
-        print(len(rows))
 
         if DBNAME == "msaccess":
+            unique_combinations = set()
+            vaLues_to_insert = []
 
             # Insert data into tbl_cache
             insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (?, ?, ?, ?)"
@@ -61,20 +59,23 @@ def insert_into_table_cache():
             conn.close()
             return True
 
-        else:
-
+        else:  
             # Insert data into tbl_cache
             insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (%s, %s, %s, %s)"
+            vaLues_to_insert = []
+            unique_combinations = set()
 
-            # Extract data for unique combinations
-            unique_rows = {tuple(row) for row in rows}
-            data_to_insert = [(row[0], row[1], row[3], row[4]) for row in unique_rows]
+            for row in rows:
+                combination = (row[0], row[3])
 
-            # Insert data in batches
-            cur.executemany(insert_query, data_to_insert)
+                if combination not in unique_combinations:
+                    unique_combinations.add(combination)
+                    vaLues_to_insert.append((row[0], row[1], row[3], row[4]))
 
-            cur.close()
-            conn.close()
+            cur.executemany(insert_query, vaLues_to_insert)
+
+
+
             return True
 
     except Exception as e:
