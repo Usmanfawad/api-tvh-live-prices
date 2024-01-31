@@ -106,7 +106,7 @@ def select_from_table_cache():
     try:
         conn = get_db()
         cur = conn.cursor()
-        sql_query = "SELECT Lieferant_Marke, Bestellnummer, inquiryAmount FROM tbl_cache ORDER BY Bestellnummer ASC"
+        sql_query = "SELECT Lieferant_Marke, Bestellnummer, inquiryAmount, json_string FROM tbl_cache ORDER BY Bestellnummer ASC"
         cur.execute(sql_query)
         rows = cur.fetchall()
         # for each in rows:

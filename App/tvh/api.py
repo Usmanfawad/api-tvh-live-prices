@@ -35,6 +35,8 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
 
         for index, row in enumerate(data_from_cache, 1):
             try:
+                # if row[3] == "":
+                print("Json request: NULL")
                 # print("----------------------Loop----------------------")
                 # enumerate, starting item 1
                 line = {
@@ -74,10 +76,10 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                 json_dump = json.dumps(complete_request, indent=4)
 
             except Exception as e:
-                print(e)
+                # Case where the pre httpx error is for instance '#NV'. The key cannot be found. In this case, delete the item.
+                # add a script inside tbl_cache.py that just inserts, error inside the json_string column and add implementation here
+                print("Pre httpx async error is: " + str(e))
 
-
-            # print("----------------------Dumping----------------------")
             async with httpx.AsyncClient() as client:
                 try:
                     # print("----------------------API call----------------------")
@@ -111,7 +113,8 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     with open(r'C:\NextRevol\NufaersatzteileProject\App\db\errorLog.txt', 'a') as f:
                         f.write(str(payload))
                         f.write("\n")
-                    print(e)
+                    print("httpx Error: " + str(e))
+                    # add a script inside tbl_cache.py that just inserts, error inside the json_string column and add implementation here
                     # raise HTTPException(status_code=e.response.status_code, detail=str(e.response.text))
 
         return {"api_response": api_response}
