@@ -34,43 +34,49 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
         updates = []
 
         for index, row in enumerate(data_from_cache, 1):
-            # print("----------------------Loop----------------------")
-            # enumerate, starting item 1
-            line = {
-                # Line number fixed, its just when you send multiple requests at one time
-                "lineNumber": 1,
-                "makeCode": data[row[0]],
-                "partNumber": row[1],
-                "customerPartNumber": f"Testanfrage Teil {index}",
-                # Fallback quantity condition, if it exists in the database, then use it or else input
-                # "quantity": row.inquiryAmount,
-                "quantity" : 1,
-                "text": userText
-            }
+            try:
+                # print("----------------------Loop----------------------")
+                # enumerate, starting item 1
+                line = {
+                    # Line number fixed, its just when you send multiple requests at one time
+                    "lineNumber": 1,
+                    "makeCode": data[row[0]],
+                    "partNumber": row[1],
+                    "customerPartNumber": f"Testanfrage Teil {index}",
+                    # Fallback quantity condition, if it exists in the database, then use it or else input
+                    # "quantity": row.inquiryAmount,
+                    "quantity" : 1,
+                    "text": userText
+                }
 
-            payload = {
-                "text": "Text abc def",
-                "customerInquiryNumber": "Testanfrage inquiry",
-                # Customer code static
-                # "customerCode": customerCode,
-                "customerCode": "00783794",
-                "customerContactName": "Jan Theunert",
-                "lines": [line]
-            }
+                payload = {
+                    "text": "Text abc def",
+                    "customerInquiryNumber": "Testanfrage inquiry",
+                    # Customer code static
+                    # "customerCode": customerCode,
+                    "customerCode": "00783794",
+                    "customerContactName": "Jan Theunert",
+                    "lines": [line]
+                }
 
-            headers = {
-                'Content-Type': 'application/json',
-                # Authorization header static
-                'Authorization': 'Basic MDA3ODM3OTQrcmVzdEB0dmguY29tOm5ZWnFMcXhnRHl6ZXk1dzJqTkZ2SHQ0dw=='
-            }
+                headers = {
+                    'Content-Type': 'application/json',
+                    # Authorization header static
+                    'Authorization': 'Basic MDA3ODM3OTQrcmVzdEB0dmguY29tOm5ZWnFMcXhnRHl6ZXk1dzJqTkZ2SHQ0dw=='
+                }
 
-            complete_request = {
-                "url": ROUTE_POST,
-                "method": "POST",
-                "headers": headers,
-                "payload": payload
-            }
-            json_dump = json.dumps(complete_request, indent=4)
+                complete_request = {
+                    "url": ROUTE_POST,
+                    "method": "POST",
+                    "headers": headers,
+                    "payload": payload
+                }
+                json_dump = json.dumps(complete_request, indent=4)
+
+            except Exception as e:
+                print(e)
+
+
             # print("----------------------Dumping----------------------")
             async with httpx.AsyncClient() as client:
                 try:
@@ -101,6 +107,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     # return {"api_response": api_response}
 
                 except httpx.HTTPError as e:
+                    print("Error here")
                     with open(r'C:\NextRevol\NufaersatzteileProject\App\db\errorLog.txt', 'a') as f:
                         f.write(str(payload))
                         f.write("\n")
@@ -116,4 +123,5 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
             #     break
 
     except Exception as e:
-        print(f"WebSocket disconnected {e}")
+        pass
+        print(f"WebSocket disconnected and thread terminated {e}")

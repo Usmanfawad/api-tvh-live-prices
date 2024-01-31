@@ -36,7 +36,7 @@ async def pre_processing():
     # delete_from = delete_from_table_cache()
     try:
         return {
-            "Success": "Pre Processing script successfully terminated"
+            "Success": "Pre Processing script successful"
         }
     except Exception as e:
         print("Exception")
@@ -48,7 +48,7 @@ async def post_processing():
     update_tbl_Preis()
     try:
         return {
-            "Success": "Post processing script successfully terminated"
+            "Success": "Post processing script successful"
         }
     except Exception as e:
         print("Exception")
@@ -76,7 +76,7 @@ async def websocket_endpoint(
 
 
     await websocket.accept()
-    await simulate_task(websocket)
+    await simulate_task(websocket, parallelConnections = parallelConnections, toUpdateArticles = toUpdateArticles)
     await websocket.close()
 
 
@@ -106,17 +106,50 @@ async def perform_database_operation(batch_number, lower_bound, upper_bound, web
 
 
 async def simulate_task(
-        websocket: WebSocket
+        websocket: WebSocket,
+        parallelConnections : Optional[int] = 1,
+        toUpdateArticles: Optional[int] = 10000
 ):
+    print("To update articles  : " + str(toUpdateArticles))
+    print("Parallel connections: " + str(parallelConnections))
     st = datetime.datetime.now()
     await websocket.send_text(f" -------- Start timestamp: {st} -------- ")
     try:
-        results = await asyncio.gather(
-            # perform_database_operation(1, 0, 3, websocket),
-            perform_database_operation(2, 10216, 10229, websocket),
-            perform_database_operation(3, 10432, 10439, websocket),
-            # perform_database_operation(4, 10648, 10650, websocket),
-        )
+        if parallelConnections == 1:
+            print(str(parallelConnections) + " thread executing")
+            results = await asyncio.gather(
+                perform_database_operation(1, 0, toUpdateArticles, websocket)
+            )
+        elif parallelConnections == 2:
+
+            to_increment = int(toUpdateArticles / 3)
+
+            results = await asyncio.gather(
+                perform_database_operation(1, 0, to_increment, websocket),
+                perform_database_operation(2, to_increment, to_increment * 2 + 1, websocket)
+            )
+        elif parallelConnections == 3:
+
+            to_increment = int(toUpdateArticles / 3)
+            print(to_increment)
+            results = await asyncio.gather(
+                perform_database_operation(1, 0, to_increment, websocket),
+                perform_database_operation(2, to_increment, to_increment * 2, websocket),
+                perform_database_operation(3, to_increment * 2, to_increment * 3 + 2, websocket)
+            )
+        elif parallelConnections == 4:
+
+            to_increment = int(toUpdateArticles / 4)
+
+            results = await asyncio.gather(
+                perform_database_operation(1, 0, to_increment, websocket),
+                perform_database_operation(2, to_increment, to_increment * 2, websocket),
+                perform_database_operation(3, to_increment * 2, to_increment * 3, websocket),
+                perform_database_operation(4, to_increment * 3, to_increment * 4 + 3, websocket)
+            )
+        else:
+            print("Unexepected error occured")
+
         result_data = {"status": "success", "message": "Task completed!"}
         await websocket.send_text(json.dumps(result_data))
 
