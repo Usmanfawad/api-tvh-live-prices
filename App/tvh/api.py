@@ -56,7 +56,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     "customerInquiryNumber": "Testanfrage inquiry",
                     # Customer code static
                     # "customerCode": customerCode,
-                    "customerCode": "00783794",
+                    "customerCode": "00597861",
                     "customerContactName": "Jan Theunert",
                     "lines": [line]
                 }
@@ -64,7 +64,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                 headers = {
                     'Content-Type': 'application/json',
                     # Authorization header static
-                    'Authorization': 'Basic MDA3ODM3OTQrcmVzdEB0dmguY29tOm5ZWnFMcXhnRHl6ZXk1dzJqTkZ2SHQ0dw=='
+                    'Authorization': 'Basic MDA1OTc4NjErcmVzdEB0dmguY29tOm5UQ2VucjRBNjJ5MkUzSkZXcmdicUZoOA=='
                 }
 
                 complete_request = {
