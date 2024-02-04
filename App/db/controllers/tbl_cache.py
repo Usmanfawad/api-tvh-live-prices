@@ -33,7 +33,7 @@ def insert_into_table_cache():
         cur = conn.cursor()
 
         # Select from tbl_Bestellnummer
-        select_query = "SELECT Bestellnummer, Lieferant, NuFa_Artikel, Lieferant_Marke, aktiv FROM tbl_Bestell_Nr WHERE aktiv='WAHR' AND Lieferant=1"
+        select_query = "SELECT Bestellnummer, Lieferant, NuFa_Artikel, Lieferant_Marke, aktiv FROM tbl_Bestell_Nr WHERE aktiv=Yes AND Lieferant=1"
 
         # Execute the query
         cur.execute(select_query)
@@ -41,39 +41,36 @@ def insert_into_table_cache():
         # Fetch all rows from the result set
         rows = cur.fetchall()
 
+        # Extract unique combinations of Bestellnummer and Lieferant_Marke
+        unique_combinations = set()
+        insert_data = []
+
         if DBNAME == "msaccess":
-            unique_combinations = set()
-            vaLues_to_insert = []
+
+            insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (?, ?, ?, ?)"
+            for row in rows:
+                combination = (row.Bestellnummer, row.Lieferant_Marke)
+                if combination not in unique_combinations:
+                    insert_data.append((row.Bestellnummer, row.Lieferant, row.Lieferant_Marke, row.aktiv))
+                    unique_combinations.add(combination)
+
+            # Insert data into tbl_cache using executemany
+            cur.executemany(insert_query, insert_data)
+            cur.close()
+            conn.close()
+            return True
+
+        else:
+            # Prepare data to insert into tbl_cache
+            data_to_insert = [(row[0], 1, row[1], 'WAHR') for row in rows if (row[0], row[3]) in new_combinations]
 
             # Insert data into tbl_cache
             insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (?, ?, ?, ?)"
-
-            # Extract data for unique combinations
-            unique_rows = {tuple(row) for row in rows}
-            data_to_insert = [(row[0], row[1], row[3], row[4]) for row in unique_rows]
-
-            # Insert data in batches
             cur.executemany(insert_query, data_to_insert)
 
             cur.close()
             conn.close()
             return True
-
-        else:  
-            # Insert data into tbl_cache
-            insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (%s, %s, %s, %s)"
-            vaLues_to_insert = []
-            unique_combinations = set()
-
-            for row in rows:
-                combination = (row[0], row[3])
-
-                if combination not in unique_combinations:
-                    unique_combinations.add(combination)
-                    vaLues_to_insert.append((row[0], row[1], row[3], row[4]))
-
-            cur.executemany(insert_query, vaLues_to_insert)
-
 
 
             return True
