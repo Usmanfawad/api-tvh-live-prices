@@ -34,6 +34,7 @@ ROUTE_GET = "https://api.tvh.com/availability-codes?language=en"
 def update_tbl_Preis():
     try:
         if DBNAME == "msaccess":
+            print("Post processing msaccess")
             conn = get_db()
             conn.autocommit = True
             cur = conn.cursor()
@@ -41,16 +42,19 @@ def update_tbl_Preis():
             query = """
                         SELECT tbl_Bestell_Nr.NuFa_Artikel, tbl_cache.Datum, tbl_cache.price, tbl_cache.listPrice, tbl_cache.Lieferant
                         FROM tbl_Bestell_Nr
-                        LEFT JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
+                        INNER JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
                                   AND tbl_Bestell_Nr.Lieferant_Marke = tbl_cache.Lieferant_Marke;
                     """
             cur.execute(query)
             rows = cur.fetchall()
             print(len(rows))
-            for row in rows:
-                insert_query = "INSERT INTO tbl_Preise (NuFa_Art, Datum, EKPreis, lst_Preis, fid_Liefer) VALUES (?, ?, ?, ?, ?)"
-                cur.execute(insert_query, row)
+            insert_query = "INSERT INTO tbl_Preise (NuFa_Art, Datum, EKPreis, lst_Preis, fid_Liefer) VALUES (?, ?, ?, ?, ?)"
+            insert_data = [(row[0], row[1], row[2], row[3], row[4]) for row in rows]
+            # Execute the insert operation using executemany
+            cur.executemany(insert_query, insert_data)
+
         else:
+            print("Post processing mysql")
             conn = get_db()
             conn.autocommit = True
             cur = conn.cursor()
@@ -58,7 +62,7 @@ def update_tbl_Preis():
             query = """
                         SELECT tbl_Bestell_Nr.NuFa_Artikel, tbl_cache.Datum, tbl_cache.price, tbl_cache.listPrice, tbl_cache.Lieferant
                         FROM tbl_Bestell_Nr
-                        LEFT JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
+                        INNER JOIN tbl_cache ON tbl_Bestell_Nr.Bestellnummer = tbl_cache.Bestellnummer
                                   AND tbl_Bestell_Nr.Lieferant_Marke = tbl_cache.Lieferant_Marke;
                     """
             cur.execute(query)
