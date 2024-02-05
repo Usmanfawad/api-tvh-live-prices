@@ -12,6 +12,7 @@ from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_c
 
 
 def to_base64(string_credentials):
+    # 00597861+rest@tvh.com:nTCenr4A62y2E3JFWrgbqFh8
     sample_string_bytes = string_credentials.encode("ascii")
 
     base64_bytes = base64.b64encode(sample_string_bytes)
@@ -19,7 +20,17 @@ def to_base64(string_credentials):
 
     return base64_string
 
-async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_bound, upper_bound, websocket: WebSocket):
+async def tvh_api(
+        batch_number,
+        userPassword,
+        customerPartNumber,
+        fallbackQuantity,
+        customerCode,
+        userText,
+        lower_bound,
+        upper_bound,
+        websocket: WebSocket
+):
     # Getting makecodes from the file
     with open(r"C:\NextRevol\NufaersatzteileProject\App\makeCodes.json", "r") as json_file:
         data = json.load(json_file)
@@ -27,6 +38,9 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
         # Here the customer code from frontend input will be there
         # ROUTE_POST = f"https://api.tvh.com/customers/customerCode/inquiries"
         ROUTE_POST = "https://api.tvh.com/customers/00783794/inquiries"
+
+        str_creds = f"{customerCode}+rest@tvh.com:{userPassword}"
+        creds_encoded = to_base64(str_creds)
 
 
         data_from_tbl_cache = select_from_table_cache()
@@ -36,7 +50,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
         for index, row in enumerate(data_from_cache, 1):
             try:
                 # if row[3] == "":
-                print("Json request: NULL")
+                # print("Json request: NULL")
                 # print("----------------------Loop----------------------")
                 # enumerate, starting item 1
                 line = {
@@ -44,7 +58,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     "lineNumber": 1,
                     "makeCode": data[row[0]],
                     "partNumber": row[1],
-                    "customerPartNumber": f"Testanfrage Teil {index}",
+                    "customerPartNumber": f"{customerPartNumber} {index}",
                     # Fallback quantity condition, if it exists in the database, then use it or else input
                     # "quantity": row.inquiryAmount,
                     "quantity" : 1,
@@ -56,7 +70,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                     "customerInquiryNumber": "Testanfrage inquiry",
                     # Customer code static
                     # "customerCode": customerCode,
-                    "customerCode": "00597861",
+                    "customerCode": f"{customerCode}",
                     "customerContactName": "Jan Theunert",
                     "lines": [line]
                 }
@@ -64,7 +78,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                 headers = {
                     'Content-Type': 'application/json',
                     # Authorization header static
-                    'Authorization': 'Basic MDA1OTc4NjErcmVzdEB0dmguY29tOm5UQ2VucjRBNjJ5MkUzSkZXcmdicUZoOA=='
+                    'Authorization': f"Basic {creds_encoded}"
                 }
 
                 complete_request = {
@@ -79,6 +93,7 @@ async def tvh_api(batch_number ,customerCode, fallbackQuantity, userText, lower_
                 # Case where the pre httpx error is for instance '#NV'. The key cannot be found. In this case, delete the item.
                 # add a script inside tbl_cache.py that just inserts, error inside the json_string column and add implementation here
                 print("Pre httpx async error is: " + str(e))
+                continue
 
             async with httpx.AsyncClient() as client:
                 try:

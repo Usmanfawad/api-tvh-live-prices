@@ -33,7 +33,11 @@ def insert_into_table_cache():
         cur = conn.cursor()
 
         # Select from tbl_Bestellnummer
-        select_query = "SELECT Bestellnummer, Lieferant, NuFa_Artikel, Lieferant_Marke, aktiv FROM tbl_Bestell_Nr WHERE aktiv=Yes AND Lieferant=1"
+
+        # For msAccess
+        # select_query = "SELECT Bestellnummer, Lieferant, NuFa_Artikel, Lieferant_Marke, aktiv FROM tbl_Bestell_Nr WHERE aktiv=Yes AND Lieferant=1"
+        # For mySQL
+        select_query = "SELECT Bestellnummer, Lieferant, NuFa_Artikel, Lieferant_Marke, aktiv FROM tbl_Bestell_Nr WHERE aktiv='WAHR' AND Lieferant=1"
 
         # Execute the query
         cur.execute(select_query)
@@ -61,18 +65,18 @@ def insert_into_table_cache():
             return True
 
         else:
-            # Prepare data to insert into tbl_cache
-            data_to_insert = [(row[0], 1, row[1], 'WAHR') for row in rows if (row[0], row[3]) in new_combinations]
 
-            # Insert data into tbl_cache
-            insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (?, ?, ?, ?)"
-            cur.executemany(insert_query, data_to_insert)
+            insert_query = "INSERT INTO tbl_cache (Bestellnummer, Lieferant, Lieferant_Marke, aktiv) VALUES (%s, %s, %s, %s)"
+            for row in rows:
+                combination = (row[0], row[3])
+                if combination not in unique_combinations:
+                    insert_data.append((row[0], row[1], row[3], row[4]))
+                    unique_combinations.add(combination)
 
+            # Insert data into tbl_cache using executemany
+            cur.executemany(insert_query, insert_data)
             cur.close()
             conn.close()
-            return True
-
-
             return True
 
     except Exception as e:

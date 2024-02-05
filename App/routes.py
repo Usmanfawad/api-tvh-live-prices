@@ -71,8 +71,13 @@ async def websocket_endpoint(
 
 
     userInput['customerCode'] = customerCode
-    userInput['fallbackQuantity'] = fallbackQuantity
+    userInput['userPassword'] = userPassword
+    userInput['customerPartNumber'] = customerPartNumber
     userInput['userText'] = userText
+    userInput['fallbackQuantity'] = fallbackQuantity
+    userInput['toUpdateArticles'] = toUpdateArticles
+    userInput['parallelConnections'] = parallelConnections
+
 
 
     await websocket.accept()
@@ -89,8 +94,10 @@ async def perform_database_operation(batch_number, lower_bound, upper_bound, web
     await websocket.send_text(f" -------- Thread {batch_number} Initiated --------")
     tvh_api_call = await tvh_api(
         batch_number=batch_number,
+        userPassword = userInput['userPassword'],
+        customerPartNumber = userInput['customerPartNumber'],
+        fallbackQuantity =  userInput['fallbackQuantity'],
         customerCode=userInput['customerCode'],
-        fallbackQuantity=userInput['fallbackQuantity'],
         userText=userInput['userText'],
         lower_bound=lower_bound,
         upper_bound=upper_bound,
