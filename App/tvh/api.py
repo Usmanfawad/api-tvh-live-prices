@@ -51,7 +51,7 @@ async def tvh_api(
             try:
                 # if row[3] == "":
                 # print("Json request: NULL")
-                # print("----------------------Loop----------------------")
+                # print("----------------------Loop----------------------")ls
                 # enumerate, starting item 1
                 line = {
                     # Line number fixed, its just when you send multiple requests at one time
@@ -78,7 +78,8 @@ async def tvh_api(
                 headers = {
                     'Content-Type': 'application/json',
                     # Authorization header static
-                    'Authorization': f"Basic {creds_encoded}"
+                    # 'Authorization': f"Basic {creds_encoded}"
+                    'Authorization': 'Basic MDA1OTc4NjErcmVzdEB0dmguY29tOm5UQ2VucjRBNjJ5MkUzSkZXcmdicUZoOA=='
                 }
 
                 complete_request = {

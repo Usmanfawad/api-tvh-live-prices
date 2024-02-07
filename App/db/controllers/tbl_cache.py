@@ -128,6 +128,7 @@ def update_json_strings_in_cache(updates, price, listPrice, availability_code):
     if DBNAME == 'msaccess':
 
         for lieferant_marke, bestellnummer, json_string, json_response in updates:
+            print(current_date)
             cur.execute("""UPDATE tbl_cache 
             SET json_string = ?, 
             json_response = ?, 
