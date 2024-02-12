@@ -1,4 +1,5 @@
 import httpx
+import os
 import asyncio
 import base64
 import json
@@ -10,6 +11,8 @@ from fastapi import APIRouter, status, Response, HTTPException, Depends, status,
 
 from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache, update_json_strings_in_cache
 
+
+PATH_API_PY = os.getenv("ENV_PATH_API_PY")
 
 def to_base64(string_credentials):
     # 00597861+rest@tvh.com:nTCenr4A62y2E3JFWrgbqFh8
@@ -39,6 +42,7 @@ async def tvh_api(
         # ROUTE_POST = f"https://api.tvh.com/customers/customerCode/inquiries"
         ROUTE_POST = "https://api.tvh.com/customers/00783794/inquiries"
 
+
         str_creds = f"{customerCode}+rest@tvh.com:{userPassword}"
         creds_encoded = to_base64(str_creds)
 
@@ -64,7 +68,7 @@ async def tvh_api(
                     "quantity" : 1,
                     "text": userText
                 }
-
+                print(customerCode)
                 payload = {
                     "text": "Text abc def",
                     "customerInquiryNumber": "Testanfrage inquiry",

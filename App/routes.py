@@ -69,7 +69,7 @@ async def websocket_endpoint(
         parallelConnections : Optional[int] = 1
 ):
 
-
+    print("here")
     userInput['customerCode'] = customerCode
     userInput['userPassword'] = userPassword
     userInput['customerPartNumber'] = customerPartNumber
