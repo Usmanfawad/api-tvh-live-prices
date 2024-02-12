@@ -12,15 +12,13 @@ from App.core.config import settings
 database_path = settings.ACCESS_DATABASE_URL
 con_string = settings.ACCESS_CONN_STRING
 
-
-
-
 def get_db():
     try:
         # Load environment variables from .env file
         load_dotenv()
         database_type = os.getenv("DATABASE_TYPE")
         if database_type == "msaccess":
+            print("The DB path is: " + database_path)
             conn = pyodbc.connect(con_string)
             return conn
         elif database_type == "mysql":

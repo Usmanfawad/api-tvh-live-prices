@@ -12,7 +12,7 @@ from fastapi import APIRouter, status, Response, HTTPException, Depends, status,
 from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache, update_json_strings_in_cache
 
 
-PATH_API_PY = os.getenv("ENV_PATH_API_PY")
+env_path = os.getenv("ENV_PATH")
 
 def to_base64(string_credentials):
     # 00597861+rest@tvh.com:nTCenr4A62y2E3JFWrgbqFh8
@@ -35,7 +35,7 @@ async def tvh_api(
         websocket: WebSocket
 ):
     # Getting makecodes from the file
-    with open(r"C:\NextRevol\NufaersatzteileProject\App\makeCodes.json", "r") as json_file:
+    with open(f"{env_path}makeCodes.json", "r") as json_file:
         data = json.load(json_file)
     try:
         # Here the customer code from frontend input will be there

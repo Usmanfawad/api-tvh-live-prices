@@ -10,7 +10,7 @@ from datetime import datetime
 load_dotenv()
 DBNAME = os.getenv("DATABASE_TYPE")
 TEST_TYPE = os.getenv("TEST_TYPE")
-DIRECTORY_PATH = os.getenv("ENV_PATH")
+# DIRECTORY_PATH = os.getenv("ENV_PATH")
 
 def delete_table_cache():
 
