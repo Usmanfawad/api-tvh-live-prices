@@ -11,12 +11,12 @@ import time
 import os
 
 
-from App.db.session import get_db
-from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache
-from App.tvh.api import tvh_api
-from App.post_processing import *
+from app.db.session import get_db
+from app.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache
+from app.tvh.api import tvh_api
+from app.post_processing import *
 
-from App.schema import UserInput
+from app.schema import UserInput
 
 router = APIRouter()
 

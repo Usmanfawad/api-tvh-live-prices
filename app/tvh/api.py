@@ -9,7 +9,7 @@ from decimal import Decimal
 from fastapi import APIRouter, status, Response, HTTPException, Depends, status, Body, WebSocket, WebSocketDisconnect
 
 
-from App.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache, update_json_strings_in_cache
+from app.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache, update_json_strings_in_cache
 
 
 env_path = os.getenv("ENV_PATH")

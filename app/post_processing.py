@@ -1,4 +1,4 @@
-from App.db.session import get_db, exec_query
+from app.db.session import get_db, exec_query
 
 import os
 from dotenv import load_dotenv
@@ -10,12 +10,11 @@ import json
 import pyodbc
 
 
-# ACCESS_DATABASE_URL = r'C:\NextRevol\NufaersatzteileProject\App\db\NuFa.accdb'
+# ACCESS_DATABASE_URL = r'C:\NextRevol\NufaersatzteileProject\app\db\NuFa.accdb'
 env_path = os.getenv("ENV_PATH")
-ACCESS_DATABASE_URL = os.path.join(env_path, "db", "NuFa.accdb")
-print(ACCESS_DATABASE_URL)
-ACCESS_CONN_STRING = f'DRIVER={{Microsoft Access Driver (*.mdb, *.accdb)}};DBQ={ACCESS_DATABASE_URL};'
-load_dotenv()
+# ACCESS_DATABASE_URL = os.path.join(env_path, "db", "NuFa.accdb")
+# ACCESS_CONN_STRING = f'DRIVER={{Microsoft Access Driver (*.mdb, *.accdb)}};DBQ={ACCESS_DATABASE_URL};'
+# load_dotenv()
 DBNAME = os.getenv("DATABASE_TYPE")
 
 ROUTE_GET = "https://api.tvh.com/availability-codes?language=en"

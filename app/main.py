@@ -1,15 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from App.core.config import settings
-from App.routes import router as main_route
+from app.core.config import settings
+from app.routes import router as main_route
 
 
 
 def get_application() -> FastAPI:
     ''' Configure, start and return the application '''
 
-    ## Start FastApi App
+    ## Start FastApi app
     application = FastAPI(
         title="TVH",
         summary="xTVH 3rd party API",

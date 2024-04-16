@@ -1,4 +1,4 @@
-from App.db.session import get_db, exec_query
+from app.db.session import get_db, exec_query
 
 import os
 import random

@@ -1,4 +1,4 @@
-# from App.db.session import get_db, exec_query
+# from app.db.session import get_db, exec_query
 import pyodbc
 import os
 from dotenv import load_dotenv

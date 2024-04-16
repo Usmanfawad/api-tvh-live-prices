@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 from typing import Generator
 
-from App.core.config import settings
+from app.core.config import settings
 
 
 database_path = settings.ACCESS_DATABASE_URL
