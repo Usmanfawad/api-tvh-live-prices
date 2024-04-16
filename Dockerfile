@@ -25,7 +25,7 @@ WORKDIR $APP_HOME
 ENV DATABASE_TYPE="mysql"
 ENV TEST_TYPE="automatic"
 # Before the App/ --- Set paths that match your directory
-ENV ENV_PATH="C:/NextRevol/nuFa/NufaersatzteileProject/App/"
+ENV ENV_PATH="C:/NextRevol/nuFa/NufaersatzteileProject/app/"
 
 
 
