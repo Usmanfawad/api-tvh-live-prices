@@ -10,7 +10,7 @@ from fastapi import APIRouter, status, Response, HTTPException, Depends, status,
 
 
 from app.db.controllers.tbl_cache import delete_table_cache, insert_into_table_cache, delete_from_table_cache, select_from_table_cache, update_json_strings_in_cache
-
+from app.tvh.makeCodes import codes
 
 env_path = os.getenv("ENV_PATH")
 
@@ -35,7 +35,7 @@ async def tvh_api(
         websocket: WebSocket
 ):
     # Getting makecodes from the file
-    with open(f"{env_path}makeCodes.json", "r") as json_file:
+    with open("makeCodes.json", "r") as json_file:
         data = json.load(json_file)
     try:
         # Here the customer code from frontend input will be there
@@ -130,7 +130,7 @@ async def tvh_api(
 
                 except httpx.HTTPError as e:
                     print("Error here")
-                    with open(r'C:\NextRevol\NufaersatzteileProject\App\db\errorLog.txt', 'a') as f:
+                    with open('os.getcwd()+"\\app\\db\\errorLog.txt', 'a') as f:
                         f.write(str(payload))
                         f.write("\n")
                     print("httpx Error: " + str(e))
